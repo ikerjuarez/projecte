@@ -15,6 +15,8 @@ public class Bingo {
         int[] taulell2 = new int[15];
         int[][] taulellPC1 = new int[3][9];
 
+        int[] numSortits = new int[90];
+
         System.out.println("#################");
         System.out.println("Escull un taulell");
         System.out.println("#################");
@@ -169,9 +171,46 @@ public class Bingo {
                 int puntsPC=0;
                 int encert;
                 int numAleatori;
+                int afegirNums=1;
                 boolean bucle=true;
 
+                do {
 
+                    numAleatori= ran.nextInt(90);
+                    while(numAleatori==0){
+                        numAleatori= ran.nextInt(90);
+                    }
+                    System.out.println("El numero aleatori és: "+numAleatori);
+                    for (int x=0;x<numFiles;x++){
+                        for (int y=0;y<numColumnes;y++){
+                            if (y<=7) {
+                                System.out.print(taulell1[x][y] + " - ");
+                            }else{
+                                System.out.print(taulell1[x][y]);
+                            }
+                        }
+                        System.out.println();
+                    }
+                    for(int j=0; j<taulell1[0].length; j++){
+                        for(int i=0; i<taulell1.length; i++){
+                            if(taulell1[i][j]==numAleatori){
+                                System.out.print("Tens un número, marca'l amb un 0: ");
+                                encert=sc.nextInt();
+                                sc.nextLine();
+                                taulell1[i][j]=encert;
+                                puntsJ++;
+                            }
+                        }
+                    }
+                    System.out.println("Torn del PC.");
+                    if(puntsJ==15){
+                        System.out.println("Has guanyat, FELICITATS!!!");
+                        break;
+                    }else if(puntsPC==15){
+                        System.out.println("Has perdut, gunya el PC.");
+                        break;
+                    }
+                }while(puntsJ<15 || puntsPC<15);
 
                 break;
 
@@ -181,8 +220,6 @@ public class Bingo {
                 break;
 
         }
-
-
 
 
         /*while (bucle){
